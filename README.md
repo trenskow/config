@@ -24,7 +24,7 @@ into this
 ```javascript
 {
 	api: {
-		port: "3000",
+		port: '3000',
 		baseUrl: 'http://api.myapp.com',
 		authToken: 'myauthtoken'
 	}
