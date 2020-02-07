@@ -1,6 +1,9 @@
 'use strict';
 
-const caseit = require('@trenskow/caseit');
+const
+	caseit = require('@trenskow/caseit'),
+	merge = require('merge'),
+	isvalid = require('isvalid');
 
 let config = {};
 
@@ -32,9 +35,6 @@ const cleanIt = (obj) => {
 	// If the object is a string we just return it.
 	if (typeof obj === 'string') return obj;
 	
-	// If the object just has a single key named `$` we return the value.
-	if (Object.keys(obj).length === 1 && obj.$) return obj;
-	
 	// Now clean all the keys.
 	obj = Object.keys(obj).reduce((res, key) => {
 		res[key.toLowerCase()] = cleanIt(obj[key]);
@@ -47,7 +47,8 @@ const cleanIt = (obj) => {
 		if (typeof obj[key] === 'string' || typeof obj[key] === 'number' || keys.length > 1) res[key] = obj[key];
 		else {
 			// Combine keys.
-			res[caseit(`${key}_${keys[0]}`)] = obj[key][keys[0]];
+			const newKey = keys[0] !== '$' ? `${key}_${keys[0]}` : key;
+			res[caseit(newKey)] = obj[key][keys[0]];
 		}
 		return res;
 	}, {});
@@ -57,4 +58,32 @@ const cleanIt = (obj) => {
 };
 
 // Give it back.
-module.exports = exports = cleanIt(config);
+module.exports = cleanIt(config);
+
+module.exports.validate = async (schema, options = {}) => {
+
+	options = merge({
+		defaults: {
+			unknownKeys: 'allow'
+		}
+	}, options);
+
+	try {
+		return module.exports = await isvalid(
+			module.exports,
+			merge(schema, {
+				'validate': {
+					type: 'AsyncFunction'
+				}
+			}),
+			options);
+	} catch (error) {
+		if (error.keyPath) {
+			error.keyPath = caseit(error.keyPath
+				.filter((part) => part)
+				.join('.'), 'snake').toUpperCase();
+		}
+		throw error;
+	}
+
+};
