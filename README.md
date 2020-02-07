@@ -33,7 +33,7 @@ into this
 
 # Validation
 
-The [isvalid](https://npmjs.org/packages/isvalid) is build into the library and can be used to validate the configuration. See the documentation of `isvalid` on how to format the schema.
+The [isvalid](https://npmjs.org/packages/isvalid) is build into the library and can be used to validate the configuration. See the documentation for `isvalid` on how to format the schema.
 
 Example
 
@@ -44,12 +44,14 @@ const config = await require('@trenskow/config').validate({
 		required: true,
 		range: '-65536'
 	}
-});
+}, /* options = { defaults: { unknownKeys: 'allow' } } */);
 ````
 
 The above example will throw an error in the data cannot be validated. It will, though, because of *isvalid* works, convert the port to a `Number`.
 
-> Validating replaces the exported data of the module – so you only have to validate once.
+Validating replaces the exported data of the module – so you only have to validate once.
+
+> The options (shown in the example) is for *isvalid* and can be provided optionally. The comment is there to show what the *config* uses as default. See the *isvalid* documentation to see available options.
 
 # LICENSE
 
