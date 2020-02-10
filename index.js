@@ -68,7 +68,7 @@ module.exports = cleanIt(config);
 module.exports.expand = (keyPaths) => {
 	module.exports = merge(cleanIt(config, keyPaths), {
 		validate: module.exports.validate,
-		expand: module.exports
+		expand: module.exports.expand
 	});
 	return module.exports;
 };
