@@ -3,7 +3,8 @@
 const
 	caseit = require('@trenskow/caseit'),
 	merge = require('merge'),
-	isvalid = require('isvalid');
+	isvalid = require('isvalid'),
+	keyd = require('keyd');
 
 let config = {};
 
@@ -30,23 +31,27 @@ Object.keys(process.env)
 	});
 
 // Cleans the object.
-const cleanIt = (obj) => {
+const cleanIt = (obj, expanded = [], keyPath = []) => {
 	
+	if (!Array.isArray(expanded)) expanded = expanded.split(/, ?/);
+
 	// If the object is a string we just return it.
 	if (typeof obj === 'string') return obj;
 	
 	// Now clean all the keys.
 	obj = Object.keys(obj).reduce((res, key) => {
-		res[key.toLowerCase()] = cleanIt(obj[key]);
+		res[key.toLowerCase()] = cleanIt(obj[key], expanded, keyPath.concat([key]));
 		return res;
 	}, {});
 
 	// Reduce the object. If a key contains an object with only one key, we merge them.
 	obj = Object.keys(obj).reduce((res, key) => {
 		const keys = Object.keys(obj[key]);
-		if (typeof obj[key] === 'string' || typeof obj[key] === 'number' || keys.length > 1) res[key] = obj[key];
-		else {
-			// Combine keys.
+		const fullKeyPath = keyd.append(keyd.join(keyPath.map((key) => key.toLowerCase())), key);
+		const isLocked = expanded.some((keyPath) => keyd.within(fullKeyPath, keyPath));
+		if (isLocked || typeof obj[key] === 'string' || typeof obj[key] === 'number' || keys.length > 1) {
+			res[key] = obj[key];
+		} else {
 			const newKey = keys[0] !== '$' ? `${key}_${keys[0]}` : key;
 			res[caseit(newKey)] = obj[key][keys[0]];
 		}
@@ -59,6 +64,14 @@ const cleanIt = (obj) => {
 
 // Give it back.
 module.exports = cleanIt(config);
+
+module.exports.expand = (keyPaths) => {
+	module.exports = merge(cleanIt(config, keyPaths), {
+		validate: module.exports.validate,
+		expand: module.exports
+	});
+	return module.exports;
+};
 
 module.exports.validate = async (schema, options = {}) => {
 
@@ -74,6 +87,9 @@ module.exports.validate = async (schema, options = {}) => {
 			merge(schema, {
 				'validate': {
 					type: 'AsyncFunction'
+				},
+				'expand': {
+					type: 'Function'
 				}
 			}),
 			options);

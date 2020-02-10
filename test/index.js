@@ -3,9 +3,12 @@
 const
 	{ expect } = require('chai');
 
-process.env.CONFIG_TEST = 'true';
-process.env.CONFIG_TEST_OBJ_STRING = 'string';
-process.env.CONFIG_TEST_OBJ_NUMBER = '200';
+process.env = {
+	CONFIG_TEST: 'true',
+	CONFIG_TEST_OBJ_STRING: 'string',
+	CONFIG_TEST_OBJ_NUMBER: '200',
+	CONFIG_TEST_SOME_OBJECTS_KEY: 'value'
+};
 
 const config = require('../');
 
@@ -69,5 +72,13 @@ describe('config', () => {
 			expect(result.validate).to.be.a('Function');
 			done();
 		}).catch(done);
+	});
+	it ('should not collapse when set to expand.', () => {
+		expect(config.expand('config.test.some.objects'))
+			.to.have.property('config')
+			.to.have.property('test')
+			.to.have.property('some')
+			.to.have.property('objects')
+			.to.have.property('key', 'value');
 	});
 });
