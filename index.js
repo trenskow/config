@@ -78,7 +78,8 @@ module.exports.validate = async (schema, options = {}) => {
 	options = merge({
 		defaults: {
 			unknownKeys: 'allow'
-		}
+		},
+		throwDeepKeyOnImplicit: true
 	}, options);
 
 	try {
@@ -91,8 +92,6 @@ module.exports.validate = async (schema, options = {}) => {
 				'expand': {
 					type: 'Function'
 				}
-			}, {
-				throwDeepKeyOnImplicit: true
 			}),
 			options);
 	} catch (error) {
