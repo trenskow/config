@@ -32,6 +32,8 @@ Object.keys(process.env)
 
 // Cleans the object.
 const cleanIt = (obj, expanded = [], keyPath = []) => {
+
+	if (typeof obj === 'undefined') return;
 	
 	if (!Array.isArray(expanded)) expanded = expanded.split(/, ?/);
 
