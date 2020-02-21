@@ -7,7 +7,8 @@ process.env = {
 	CONFIG_TEST: 'true',
 	CONFIG_TEST_OBJ_STRING: 'string',
 	CONFIG_TEST_OBJ_NUMBER: '200',
-	CONFIG_TEST_SOME_OBJECTS_KEY: 'value'
+	CONFIG_TEST_SOME_OBJECTS_KEY: 'value',
+	CONFIG_TEST_SOME_OBJECTS_OTHER_KEY: undefined
 };
 
 const config = require('../');
