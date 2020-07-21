@@ -30,6 +30,26 @@ Object.keys(process.env)
 			});
 	});
 
+const fillArray = (value, length) => {
+	let result = [];
+	for (let idx = 0 ; idx < length ; idx++) result.push(value);
+	return result;
+};
+
+const makeArrayIfNecessary = (obj) => {
+
+	const keys = Object.keys(obj);
+	const arrayKeys = fillArray(undefined, keys.length)
+		.map((_, idx) => idx);
+
+	for (let idx = 0 ; idx < keys.length; idx++) {
+		if (keys[idx] != arrayKeys[idx]) return obj;
+	}
+
+	return arrayKeys.map((idx) => obj[idx]);
+
+};
+
 // Cleans the object.
 const cleanIt = (obj, expanded = [], keyPath = []) => {
 
@@ -48,16 +68,20 @@ const cleanIt = (obj, expanded = [], keyPath = []) => {
 
 	// Reduce the object. If a key contains an object with only one key, we merge them.
 	obj = Object.keys(obj).reduce((res, key) => {
+
 		const keys = obj[key] ? Object.keys(obj[key]) : [];
 		const fullKeyPath = keyd.append(keyd.join(keyPath.map((key) => key.toLowerCase())), key);
 		const isLocked = expanded.some((keyPath) => keyd.within(fullKeyPath, keyPath));
+
 		if (isLocked || typeof obj[key] === 'undefined' || typeof obj[key] === 'string' || typeof obj[key] === 'number' || keys.length > 1) {
 			res[key] = obj[key];
 		} else {
 			const newKey = keys[0] !== '$' ? `${key}_${keys[0]}` : key;
 			res[caseit(newKey)] = obj[key][keys[0]];
 		}
-		return res;
+
+		return makeArrayIfNecessary(res);
+
 	}, {});
 
 	return obj;

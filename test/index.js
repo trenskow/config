@@ -8,7 +8,11 @@ process.env = {
 	CONFIG_TEST_OBJ_STRING: 'string',
 	CONFIG_TEST_OBJ_NUMBER: '200',
 	CONFIG_TEST_SOME_OBJECTS_KEY: 'value',
-	CONFIG_TEST_SOME_OBJECTS_OTHER_KEY: undefined
+	CONFIG_TEST_SOME_OBJECTS_OTHER_KEY: undefined,
+	CONFIG_TEST_ARRAY_0: '0',
+	CONFIG_TEST_ARRAY_1: '1',
+	CONFIG_TEST_ARRAY_2: '2',
+	CONFIG_TEST_ARRAY_3: '3',
 };
 
 const config = require('../');
@@ -81,5 +85,13 @@ describe('config', () => {
 			.to.have.property('some')
 			.to.have.property('objects')
 			.to.have.property('key', 'value');
+	});
+	it ('should convert arrays into arrays.', () => {
+		const result = require('../');
+		expect(result)
+			.to.have.property('config')
+			.to.have.property('test')
+			.to.have.property('array')
+			.to.eql(['0', '1', '2', '3']);
 	});
 });

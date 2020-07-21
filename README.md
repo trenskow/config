@@ -17,6 +17,9 @@ Turn this
 API_PORT=3000
 API_BASE_URL="http://api.myapp.com/"
 API_AUTH_TOKEN=myauthtoken
+API_USER_KEYS_0="key1"
+API_USER_KEYS_1="key2"
+API_USER_KEYS_2="key3"
 ````
 
 into this
@@ -26,7 +29,12 @@ into this
 	api: {
 		port: '3000',
 		baseUrl: 'http://api.myapp.com',
-		authToken: 'myauthtoken'
+		authToken: 'myauthtoken',
+		userKeys: [
+			'key1',
+			'key2',
+			'key3'
+		]
 	}
 }
 ````
