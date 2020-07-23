@@ -13,6 +13,7 @@ process.env = {
 	CONFIG_TEST_ARRAY_1: '1',
 	CONFIG_TEST_ARRAY_2: '2',
 	CONFIG_TEST_ARRAY_3: '3',
+	CONFIG_TEST_SMALL_ARRAY_0: '0'
 };
 
 const config = require('../');
@@ -93,5 +94,13 @@ describe('config', () => {
 			.to.have.property('test')
 			.to.have.property('array')
 			.to.eql(['0', '1', '2', '3']);
+	});
+	it ('should convert even small arrays.', () => {
+		const result = require('../');
+		expect(result)
+			.to.have.property('config')
+			.to.have.property('test')
+			.to.have.property('smallArray')
+			.to.eql(['0']);
 	});
 });

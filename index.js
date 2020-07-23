@@ -73,7 +73,7 @@ const cleanIt = (obj, expanded = [], keyPath = []) => {
 		const fullKeyPath = keyd.append(keyd.join(keyPath.map((key) => key.toLowerCase())), key);
 		const isLocked = expanded.some((keyPath) => keyd.within(fullKeyPath, keyPath));
 
-		if (isLocked || typeof obj[key] === 'undefined' || typeof obj[key] === 'string' || typeof obj[key] === 'number' || keys.length > 1) {
+		if (Array.isArray(obj[key]) || isLocked || typeof obj[key] === 'undefined' || typeof obj[key] === 'string' || typeof obj[key] === 'number' || keys.length > 1) {
 			res[key] = obj[key];
 		} else {
 			const newKey = keys[0] !== '$' ? `${key}_${keys[0]}` : key;
