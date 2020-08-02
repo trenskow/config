@@ -13,7 +13,7 @@ process.env = {
 	CONFIG_TEST_ARRAY_1: '1',
 	CONFIG_TEST_ARRAY_2: '2',
 	CONFIG_TEST_ARRAY_3: '3',
-	CONFIG_TEST_SMALL_ARRAY_0: '0'
+	config_test_small_array_0: '0'
 };
 
 const config = require('../');

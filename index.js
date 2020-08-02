@@ -13,7 +13,10 @@ Object.keys(process.env)
 	.forEach((key) => {
 
 		// Split and filter.
-		const parts = key.split('_').filter((part) => part);
+		const parts = key
+			.split('_')
+			.filter((part) => part)
+			.map((part) => part.toLowerCase());
 
 		let obj = config;
 
