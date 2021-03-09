@@ -95,7 +95,7 @@ const cleanIt = (obj, expanded = [], keyPath = []) => {
 module.exports = cleanIt(config);
 
 module.exports.expand = (keyPaths) => {
-	module.exports = merge(cleanIt(config, keyPaths), {
+	module.exports = merge(module.exports, cleanIt(config, keyPaths), {
 		validate: module.exports.validate,
 		expand: module.exports.expand
 	});
@@ -112,7 +112,7 @@ module.exports.validate = async (schema, options = {}) => {
 	}, options);
 
 	try {
-		return module.exports = await isvalid(
+		return module.exports = merge(module.exports, await isvalid(
 			module.exports,
 			merge(schema, {
 				'validate': {
@@ -122,7 +122,7 @@ module.exports.validate = async (schema, options = {}) => {
 					type: 'Function'
 				}
 			}),
-			options);
+			options));
 	} catch (error) {
 		if (error.keyPath) {
 			error.keyPath = caseit(error.keyPath
