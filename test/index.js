@@ -61,6 +61,20 @@ describe('config', () => {
 			done();
 		}).catch(done);
 	});
+	it ('should convert arrays into arrays.', () => {
+		const result = require('../');
+		expect(result)
+			.to.have.property('configTest')
+			.to.have.property('array')
+			.to.eql(['0', '1', '2', '3']);
+	});
+	it ('should convert even small arrays.', () => {
+		const result = require('../');
+		expect(result)
+			.to.have.property('configTest')
+			.to.have.property('smallArray')
+			.to.eql(['0']);
+	});
 	it ('not remove validate method when unknown keys are set to be removed', (done) => {
 		config.validate({
 			'configTest': {
@@ -78,29 +92,5 @@ describe('config', () => {
 			expect(result.validate).to.be.a('Function');
 			done();
 		}).catch(done);
-	});
-	it ('should not collapse when set to expand.', () => {
-		expect(config.expand('config.test.some.objects'))
-			.to.have.property('config')
-			.to.have.property('test')
-			.to.have.property('some')
-			.to.have.property('objects')
-			.to.have.property('key', 'value');
-	});
-	it ('should convert arrays into arrays.', () => {
-		const result = require('../');
-		expect(result)
-			.to.have.property('config')
-			.to.have.property('test')
-			.to.have.property('array')
-			.to.eql(['0', '1', '2', '3']);
-	});
-	it ('should convert even small arrays.', () => {
-		const result = require('../');
-		expect(result)
-			.to.have.property('config')
-			.to.have.property('test')
-			.to.have.property('smallArray')
-			.to.eql(['0']);
 	});
 });

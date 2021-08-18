@@ -94,15 +94,11 @@ const cleanIt = (obj, expanded = [], keyPath = []) => {
 // Give it back.
 module.exports = cleanIt(config);
 
-module.exports.expand = (keyPaths) => {
-	module.exports = merge(module.exports, cleanIt(config, keyPaths), {
-		validate: module.exports.validate,
-		expand: module.exports.expand
-	});
-	return module.exports;
-};
-
 module.exports.validate = async (schema, options = {}) => {
+
+	module.exports = merge(module.exports, cleanIt(config, isvalid.keyPaths(schema, Object).filter((keyPath) => keyPath)), {
+		validate: module.exports.validate
+	});
 
 	options = merge({
 		defaults: {
@@ -117,9 +113,6 @@ module.exports.validate = async (schema, options = {}) => {
 			merge(schema, {
 				'validate': {
 					type: 'AsyncFunction'
-				},
-				'expand': {
-					type: 'Function'
 				}
 			}),
 			options));
