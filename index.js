@@ -35,7 +35,7 @@ Object.keys(process.env)
 
 const fillArray = (value, length) => {
 	let result = [];
-	for (let idx = 0 ; idx < length ; idx++) result.push(value);
+	for (let idx = 0; idx < length; idx++) result.push(value);
 	return result;
 };
 
@@ -45,7 +45,7 @@ const makeArrayIfNecessary = (obj) => {
 	const arrayKeys = fillArray(undefined, keys.length)
 		.map((_, idx) => idx);
 
-	for (let idx = 0 ; idx < keys.length; idx++) {
+	for (let idx = 0; idx < keys.length; idx++) {
 		if (keys[idx] != arrayKeys[idx]) return obj;
 	}
 
@@ -57,12 +57,12 @@ const makeArrayIfNecessary = (obj) => {
 const cleanIt = (obj, expanded = [], keyPath = []) => {
 
 	if (typeof obj === 'undefined') return;
-	
+
 	if (!Array.isArray(expanded)) expanded = expanded.split(/, ?/);
 
 	// If the object is a string we just return it.
 	if (typeof obj === 'string') return obj;
-	
+
 	// Now clean all the keys.
 	obj = Object.keys(obj).reduce((res, key) => {
 		res[key.toLowerCase()] = cleanIt(obj[key], expanded, keyPath.concat([key]));
@@ -96,23 +96,25 @@ module.exports = cleanIt(config);
 
 module.exports.validate = async (schema, options = {}) => {
 
-	module.exports = merge(module.exports, cleanIt(config, isvalid.keyPaths(schema, Object).filter((keyPath) => keyPath)), {
+	schema = isvalid.formalize(schema);
+
+	module.exports = merge(module.exports, cleanIt(config, isvalid.keyPaths(schema).all(Object).filter((keyPath) => keyPath)), {
 		validate: module.exports.validate
 	});
 
 	options = merge({
 		defaults: {
 			unknownKeys: 'allow'
-		},
-		throwDeepKeyOnImplicit: true
+		}
 	}, options);
 
 	try {
 		return module.exports = merge(module.exports, await isvalid(
 			module.exports,
-			merge(schema, {
+			isvalid.merge(schema).with({
 				'validate': {
-					type: 'AsyncFunction'
+					type: 'AsyncFunction',
+					required: true
 				}
 			}),
 			options));

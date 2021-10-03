@@ -30,7 +30,7 @@ describe('config', () => {
 		config.validate({
 			'configTest': {
 				'obj': {
-					'string': { type: Number, required: true}
+					'string': { type: Number, required: true }
 				}
 			}
 		}).then(() => {

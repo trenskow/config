@@ -1,6 +1,6 @@
 {
   "name": "@trenskow/config",
-  "version": "2.0.0",
+  "version": "2.1.1",
   "description": "Converts `process.env` into a neatly packed object.",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,7 @@
   "homepage": "https://github.com/trenskow/config#readme",
   "dependencies": {
     "@trenskow/caseit": "^1.0.1",
-    "isvalid": "^2.8.0",
+    "isvalid": "^2.10.2",
     "keyd": "^1.4.0",
     "merge": "^2.1.1"
   },
