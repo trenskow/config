@@ -9,7 +9,7 @@ const
 let config = {};
 
 // We first split the env names at `_` and put them into objects.
-Object.keys(process.env)
+Object.keys(process.env).filter((key) => process.env[key])
 	.forEach((key) => {
 
 		// Split and filter.
