@@ -73,8 +73,14 @@ const cleanIt = (obj, expanded = [], keyPath = []) => {
 	obj = Object.keys(obj).reduce((res, key) => {
 
 		const keys = obj[key] ? Object.keys(obj[key]) : [];
-		const fullKeyPath = keyd.append(keyd.join(keyPath.map((key) => key.toLowerCase())), key);
-		const isLocked = expanded.some((keyPath) => keyd.within(fullKeyPath, keyPath));
+
+		let fullKeyPath = keyd.join(keyPath.map((key) => key.toLowerCase()));
+
+		if (key !== '$') fullKeyPath = keyd.append(fullKeyPath, key);
+
+		const isLocked = expanded.some((keyPath) => {
+			return keyPath.split(/(?=[A-Z])|\./).map((key) => caseit(key)).join('.') == fullKeyPath;
+		});
 
 		if (Array.isArray(obj[key]) || isLocked || typeof obj[key] === 'undefined' || typeof obj[key] === 'string' || typeof obj[key] === 'number' || keys.length > 1) {
 			res[key] = obj[key];

@@ -13,6 +13,7 @@ process.env = {
 	CONFIG_TEST_ARRAY_1: '1',
 	CONFIG_TEST_ARRAY_2: '2',
 	CONFIG_TEST_ARRAY_3: '3',
+	CONFIG_TEST_THIS_IS_A_DEEPLY_NESTED_KEY: 'true',
 	config_test_small_array_0: '0'
 };
 
@@ -90,6 +91,27 @@ describe('config', () => {
 		}).then(() => {
 			const result = require('../');
 			expect(result.validate).to.be.a('Function');
+			done();
+		}).catch(done);
+	});
+	it ('must validate a deeply nested key.', (done) => {
+		config.validate({
+			'configTest': {
+				'this': {
+					'is': {
+						'a': {
+							'deeply': {
+								'nested': {
+									'key': { type: Boolean }
+								}
+							}
+						}
+					}
+				}
+			}
+		}).then(() => {
+			const result = require('../');
+			expect(result.configTest.this.is.a.deeply.nested.key).to.equal(true);
 			done();
 		}).catch(done);
 	});
