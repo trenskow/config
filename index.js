@@ -1,37 +1,9 @@
 'use strict';
 
-const
-	caseit = require('@trenskow/caseit'),
-	merge = require('merge'),
-	isvalid = require('isvalid'),
-	keyd = require('keyd');
-
-let config = {};
-
-// We first split the env names at `_` and put them into objects.
-Object.keys(process.env).filter((key) => process.env[key])
-	.forEach((key) => {
-
-		// Split and filter.
-		const parts = key
-			.split('_')
-			.filter((part) => part)
-			.map((part) => part.toLowerCase());
-
-		let obj = config;
-
-		parts
-			.forEach((part, idx) => {
-				// If we're at the end of the name assign { $: value }.
-				if (idx === parts.length - 1) {
-					obj[part] = { $: process.env[key] };
-				}
-				// - else just assign an empty object to store the children.
-				else {
-					obj = obj[part] = obj[part] || {};
-				}
-			});
-	});
+import caseit from '@trenskow/caseit';
+import merge from 'merge';
+import isvalid, { formalize, keyPaths } from 'isvalid';
+import keyd from 'keyd';
 
 const fillArray = (value, length) => {
 	let result = [];
@@ -97,16 +69,20 @@ const cleanIt = (obj, expanded = [], keyPath = []) => {
 
 };
 
+const camelCased = (schema) => {
+	const result = {};
+	Object.keys(process.env)
+		.filter((key) => process.env[key])
+		.forEach((key) => {
+			keyd(result).set(`${caseit(key.toLowerCase(), 'domain')}.$`, process.env[key]);
+		});
+	return cleanIt(result, keyPaths(schema).all(Object).filter((keyPath) => keyPath));
+};
+
 // Give it back.
-module.exports = cleanIt(config);
+export default async (schema = {}, options = {}) => {
 
-module.exports.validate = async (schema, options = {}) => {
-
-	schema = isvalid.formalize(schema);
-
-	module.exports = merge(module.exports, cleanIt(config, isvalid.keyPaths(schema).all(Object).filter((keyPath) => keyPath)), {
-		validate: module.exports.validate
-	});
+	schema = formalize(schema);
 
 	options = merge({
 		defaults: {
@@ -115,15 +91,10 @@ module.exports.validate = async (schema, options = {}) => {
 	}, options);
 
 	try {
-		return module.exports = merge(module.exports, await isvalid(
-			module.exports,
-			isvalid.merge(schema).with({
-				'validate': {
-					type: 'AsyncFunction',
-					required: true
-				}
-			}),
-			options));
+		return await isvalid(
+			camelCased(schema),
+			schema,
+			options);
 	} catch (error) {
 		if (error.keyPath) {
 			error.keyPath = caseit(error.keyPath
