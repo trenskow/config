@@ -86,9 +86,9 @@ export default async (schema = {}, options = {}) => {
 
 	options = merge({
 		defaults: {
-			unknownKeys: 'allow',
-			stopOnFirstError: false
-		}
+			unknownKeys: 'allow'
+		},
+		stopOnFirstError: false
 	}, options);
 
 	try {
