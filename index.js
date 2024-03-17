@@ -88,7 +88,7 @@ export default async (schema = {}, options = {}) => {
 		defaults: {
 			unknownKeys: 'allow'
 		},
-		stopOnFirstError: false
+		aggregatedErrors: 'flatten'
 	}, options);
 
 	try {
