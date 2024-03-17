@@ -86,7 +86,8 @@ export default async (schema = {}, options = {}) => {
 
 	options = merge({
 		defaults: {
-			unknownKeys: 'allow'
+			unknownKeys: 'allow',
+			stopOnFirstError: false
 		}
 	}, options);
 
@@ -96,12 +97,15 @@ export default async (schema = {}, options = {}) => {
 			schema,
 			options);
 	} catch (error) {
-		if (error.keyPath) {
-			error.keyPath = caseit(error.keyPath
-				.filter((part) => part)
-				.join('.'), 'snake').toUpperCase();
-		}
+		(error.errors || [error]).forEach((error) => {
+			if (error.keyPath) {
+				error.keyPath = caseit(error.keyPath
+					.filter((part) => part)
+					.join('.'), 'snake').toUpperCase();
+			}
+		});
 		throw error;
+
 	}
 
 };
