@@ -26,14 +26,14 @@
   },
   "homepage": "https://github.com/trenskow/config#readme",
   "dependencies": {
-    "@trenskow/caseit": "^1.3.12",
-    "isvalid": "^4.1.5",
-    "keyd": "^2.1.2",
+    "@trenskow/caseit": "^1.3.13",
+    "isvalid": "^4.1.7",
+    "keyd": "^2.1.3",
     "merge": "^2.1.1"
   },
   "devDependencies": {
-    "chai": "^5.1.0",
-    "chai-as-promised": "^7.1.1",
-    "mocha": "^10.3.0"
+    "chai": "^5.1.1",
+    "chai-as-promised": "^8.0.0",
+    "mocha": "^10.7.3"
   }
 }
