@@ -35,8 +35,5 @@
     "chai": "^5.1.0",
     "chai-as-promised": "^7.1.1",
     "mocha": "^10.3.0"
-  },
-  "overrides": {
-    "chai": "^5.1.0"
   }
 }
