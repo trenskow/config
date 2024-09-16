@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/trenskow/config#readme",
   "dependencies": {
-    "@trenskow/caseit": "^1.3.13",
-    "isvalid": "^4.1.9",
+    "@trenskow/caseit": "^1.3.14",
+    "isvalid": "^4.1.10",
     "keyd": "^2.1.4",
     "merge": "^2.1.1"
   },
