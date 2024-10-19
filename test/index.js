@@ -1,14 +1,14 @@
 'use strict';
 
 import { use, expect } from 'chai';
-import merge from 'merge';
+import merge from '@trenskow/merge';
 import chaiAsPromised from 'chai-as-promised';
 
 use(chaiAsPromised);
 
 import config from '../index.js';
 
-process.env = merge(process.env, {
+process.env = merge({}, process.env, {
 	CONFIG_TEST: 'true',
 	CONFIG_TEST_OBJ_STRING: 'string',
 	CONFIG_TEST_OBJ_NUMBER: '200',

@@ -1,7 +1,7 @@
 'use strict';
 
 import caseit from '@trenskow/caseit';
-import merge from 'merge';
+import merge from '@trenskow/merge';
 import isvalid, { formalize, keyPaths } from 'isvalid';
 import keyd from 'keyd';
 
