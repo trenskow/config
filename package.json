@@ -28,7 +28,7 @@
 	"dependencies": {
 		"@trenskow/caseit": "^1.4.4",
 		"@trenskow/merge": "^0.1.26",
-		"isvalid": "^4.1.15",
+		"isvalid": "^4.1.16",
 		"keyd": "^2.1.7"
 	},
 	"devDependencies": {
