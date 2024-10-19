@@ -1,39 +1,43 @@
 {
-  "name": "@trenskow/config",
-  "version": "3.0.47",
-  "description": "Converts `process.env` into a neatly packed object.",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "./node_modules/mocha/bin/mocha.js test/index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/trenskow/config.git"
-  },
-  "keywords": [
-    "config",
-    "process",
-    "env",
-    "environment",
-    "variable",
-    "validate"
-  ],
-  "author": "Kristian Trenskow <trenskow@me.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/trenskow/config/issues"
-  },
-  "homepage": "https://github.com/trenskow/config#readme",
-  "dependencies": {
-    "@trenskow/caseit": "^1.3.15",
-    "isvalid": "^4.1.12",
-    "keyd": "^2.1.5",
-    "merge": "^2.1.1"
-  },
-  "devDependencies": {
-    "chai": "^5.1.1",
-    "chai-as-promised": "^8.0.0",
-    "mocha": "^10.7.3"
-  }
+	"name": "@trenskow/config",
+	"version": "3.0.47",
+	"description": "Converts `process.env` into a neatly packed object.",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"test": "./node_modules/mocha/bin/mocha.js test/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/trenskow/config.git"
+	},
+	"keywords": [
+		"config",
+		"process",
+		"env",
+		"environment",
+		"variable",
+		"validate"
+	],
+	"author": "Kristian Trenskow <trenskow@me.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/trenskow/config/issues"
+	},
+	"homepage": "https://github.com/trenskow/config#readme",
+	"dependencies": {
+		"@trenskow/caseit": "^1.3.15",
+		"isvalid": "^4.1.12",
+		"keyd": "^2.1.5",
+		"merge": "^2.1.1"
+	},
+	"devDependencies": {
+		"@eslint/eslintrc": "^3.1.0",
+		"@eslint/js": "^9.13.0",
+		"chai": "^5.1.1",
+		"chai-as-promised": "^8.0.0",
+		"eslint": "^9.13.0",
+		"globals": "^15.11.0",
+		"mocha": "^10.7.3"
+	}
 }
