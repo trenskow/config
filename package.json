@@ -28,8 +28,8 @@
 	"dependencies": {
 		"@trenskow/caseit": "^1.4.4",
 		"@trenskow/merge": "^0.1.27",
-		"isvalid": "^4.1.16",
-		"keyd": "^2.1.8"
+		"isvalid": "^4.1.17",
+		"keyd": "^2.1.9"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.1.0",
