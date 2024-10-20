@@ -27,7 +27,7 @@
 	"homepage": "https://github.com/trenskow/config#readme",
 	"dependencies": {
 		"@trenskow/caseit": "^1.4.4",
-		"@trenskow/merge": "^0.1.29",
+		"@trenskow/merge": "^0.1.30",
 		"isvalid": "^4.1.19",
 		"keyd": "^2.1.11"
 	},
