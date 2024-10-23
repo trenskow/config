@@ -1,4 +1,10 @@
-'use strict';
+//
+// index.js
+//
+// Created by Kristian Trenskow on 2020-02-06
+//
+// See license in LICENSE
+//
 
 import { use, expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';

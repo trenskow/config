@@ -6,15 +6,13 @@
 // See license in LICENSE
 //
 
-import { readFileSync } from 'fs';
-import { resolve, dirname } from 'path';
-
 import caseit from '@trenskow/caseit';
 import merge from '@trenskow/merge';
 import isvalid, { formalize, keyPaths } from 'isvalid';
 import keyd from 'keyd';
+import dotenv from '@trenskow/dotenv';
 
-const __dirname = new URL('.', import.meta.url).pathname;
+dotenv();
 
 const fillArray = (value, length) => {
 	let result = [];
@@ -80,46 +78,16 @@ const cleanIt = (obj, expanded = [], keyPath = []) => {
 
 };
 
-const camelCased = (schema, env) => {
+const camelCased = (schema) => {
 	const result = {};
-	Object.keys(env)
-		.filter((key) => env[key])
+	Object.keys(process.env)
+		.filter((key) => process.env[key])
 		.forEach((key) => {
-			keyd(result).set(`${caseit(key.toLowerCase(), 'domain')}.$`, env[key]);
+			keyd(result).set(`${caseit(key.toLowerCase(), 'domain')}.$`, process.env[key]);
 		});
 	return cleanIt(result, keyPaths(schema).all(Object).filter((keyPath) => keyPath));
 };
 
-const readEnvironment = (directory = __dirname) => {
-
-	const env = process.env.NODE_ENV || 'development';
-
-	const paths = [
-		resolve(directory, '.env'),
-		resolve(directory, `.env.${env}`)
-	];
-
-	let result = {};
-
-	paths.forEach((path) => {
-		try {
-			const data = readFileSync(path, 'utf8');
-			data
-				.split('\n')
-				.map((line) => line.trim())
-				.filter((line) => line && line[0] !== '#')
-				.forEach((line) => {
-					const [key, value] = line.split('=');
-					result[key] = value.trim().replace(/(^['"]|['"]$)/g, '');
-				});
-		} catch (_) { }
-	});
-
-	if (directory !== '/') result = merge(result, readEnvironment(resolve(directory, '..')));
-
-	return result;
-
-};
 
 // Give it back.
 export default async (schema = {}, options = {}) => {
@@ -135,8 +103,7 @@ export default async (schema = {}, options = {}) => {
 
 	try {
 		return await isvalid(
-			camelCased(schema, merge({}, Object.assign({}, process.env), readEnvironment(
-				dirname(resolve(process.cwd(), process.argv[1])) || __dirname))),
+			camelCased(schema),
 			schema,
 			options);
 	} catch (error) {
