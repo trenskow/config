@@ -1,9 +1,20 @@
-'use strict';
+//
+// index.js
+//
+// Created by Kristian Trenskow on 2020-02-06
+//
+// See license in LICENSE
+//
+
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 
 import caseit from '@trenskow/caseit';
 import merge from '@trenskow/merge';
 import isvalid, { formalize, keyPaths } from 'isvalid';
 import keyd from 'keyd';
+
+const __dirname = new URL('.', import.meta.url).pathname;
 
 const fillArray = (value, length) => {
 	let result = [];
@@ -69,14 +80,45 @@ const cleanIt = (obj, expanded = [], keyPath = []) => {
 
 };
 
-const camelCased = (schema) => {
+const camelCased = (schema, env) => {
 	const result = {};
-	Object.keys(process.env)
-		.filter((key) => process.env[key])
+	Object.keys(env)
+		.filter((key) => env[key])
 		.forEach((key) => {
-			keyd(result).set(`${caseit(key.toLowerCase(), 'domain')}.$`, process.env[key]);
+			keyd(result).set(`${caseit(key.toLowerCase(), 'domain')}.$`, env[key]);
 		});
 	return cleanIt(result, keyPaths(schema).all(Object).filter((keyPath) => keyPath));
+};
+
+const readEnvironment = (directory = __dirname) => {
+
+	const env = process.env.NODE_ENV || 'development';
+
+	const paths = [
+		resolve(directory, '.env'),
+		resolve(directory, `.env.${env}`)
+	];
+
+	let result = {};
+
+	paths.forEach((path) => {
+		try {
+			const data = readFileSync(path, 'utf8');
+			data
+				.split('\n')
+				.map((line) => line.trim())
+				.filter((line) => line && line[0] !== '#')
+				.forEach((line) => {
+					const [key, value] = line.split('=');
+					result[key] = value.trim().replace(/(^['"]|['"]$)/g, '');
+				});
+		} catch (_) { }
+	});
+
+	if (directory !== '/') result = merge(result, readEnvironment(resolve(directory, '..')));
+
+	return result;
+
 };
 
 // Give it back.
@@ -93,7 +135,7 @@ export default async (schema = {}, options = {}) => {
 
 	try {
 		return await isvalid(
-			camelCased(schema),
+			camelCased(schema, merge({}, process.env, readEnvironment())),
 			schema,
 			options);
 	} catch (error) {
@@ -105,7 +147,6 @@ export default async (schema = {}, options = {}) => {
 			}
 		});
 		throw error;
-
 	}
 
 };

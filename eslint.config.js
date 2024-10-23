@@ -35,6 +35,7 @@ export default [...compat.extends('eslint:recommended'), {
 
 		'no-unused-vars': ['error', {
 			argsIgnorePattern: '^_',
+			caughtErrors: 'none'
 		}],
 
 		'no-empty': ['error', {
