@@ -7,7 +7,7 @@
 //
 
 import { readFileSync } from 'fs';
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
 
 import caseit from '@trenskow/caseit';
 import merge from '@trenskow/merge';
@@ -135,7 +135,8 @@ export default async (schema = {}, options = {}) => {
 
 	try {
 		return await isvalid(
-			camelCased(schema, merge({}, process.env, readEnvironment())),
+			camelCased(schema, merge({}, process.env, readEnvironment(
+				dirname(resolve(process.cwd(), process.argv[1])) || __dirname))),
 			schema,
 			options);
 	} catch (error) {
