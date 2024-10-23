@@ -135,7 +135,7 @@ export default async (schema = {}, options = {}) => {
 
 	try {
 		return await isvalid(
-			camelCased(schema, merge({}, process.env, readEnvironment(
+			camelCased(schema, merge({}, Object.assign({}, process.env), readEnvironment(
 				dirname(resolve(process.cwd(), process.argv[1])) || __dirname))),
 			schema,
 			options);
