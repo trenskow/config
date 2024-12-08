@@ -27,18 +27,18 @@
 	"homepage": "https://github.com/trenskow/config#readme",
 	"dependencies": {
 		"@trenskow/caseit": "^1.4.4",
-		"@trenskow/dotenv": "^0.1.1",
+		"@trenskow/dotenv": "^0.1.2",
 		"@trenskow/merge": "^0.1.30",
 		"isvalid": "^4.1.20",
 		"keyd": "^2.1.12"
 	},
 	"devDependencies": {
-		"@eslint/eslintrc": "^3.1.0",
+		"@eslint/eslintrc": "^3.2.0",
 		"@eslint/js": "^9.13.0",
-		"chai": "^5.1.1",
-		"chai-as-promised": "^8.0.0",
-		"eslint": "^9.13.0",
-		"globals": "^15.11.0",
-		"mocha": "^10.7.3"
+		"chai": "^5.1.2",
+		"chai-as-promised": "^8.0.1",
+		"eslint": "^9.16.0",
+		"globals": "^15.13.0",
+		"mocha": "^10.8.2"
 	}
 }
