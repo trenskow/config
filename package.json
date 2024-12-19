@@ -26,11 +26,11 @@
 	},
 	"homepage": "https://github.com/trenskow/config#readme",
 	"dependencies": {
-		"@trenskow/caseit": "^1.4.5",
+		"@trenskow/caseit": "^1.4.6",
 		"@trenskow/dotenv": "^0.1.4",
-		"@trenskow/merge": "^0.1.32",
-		"isvalid": "^4.1.23",
-		"keyd": "^2.1.15"
+		"@trenskow/merge": "^0.1.33",
+		"isvalid": "^4.1.24",
+		"keyd": "^2.1.16"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.2.0",
