@@ -27,7 +27,7 @@
 	"homepage": "https://github.com/trenskow/config#readme",
 	"dependencies": {
 		"@trenskow/caseit": "^1.4.13",
-		"@trenskow/dotenv": "^0.1.11",
+		"@trenskow/dotenv": "^0.1.13",
 		"@trenskow/merge": "^0.1.41",
 		"isvalid": "^4.2.1",
 		"keyd": "^2.1.32"
@@ -39,6 +39,6 @@
 		"chai-as-promised": "^8.0.1",
 		"eslint": "^9.28.0",
 		"globals": "^16.2.0",
-		"mocha": "^11.5.0"
+		"mocha": "^11.6.0"
 	}
 }
