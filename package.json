@@ -1,6 +1,6 @@
 {
 	"name": "@trenskow/config",
-	"version": "3.1.58",
+	"version": "3.1.59",
 	"description": "Converts `process.env` into a neatly packed object.",
 	"main": "index.js",
 	"type": "module",
