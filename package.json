@@ -30,7 +30,7 @@
 		"@trenskow/dotenv": "^0.1.20",
 		"@trenskow/merge": "^0.1.48",
 		"isvalid": "^4.2.13",
-		"keyd": "^2.1.43"
+		"keyd": "^2.1.44"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.3",
