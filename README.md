@@ -54,7 +54,7 @@ const myConfig = await config({
 	'port': {
 		type: Number,
 		required: true,
-		range: '-65535'
+		range: '1...65535'
 	}
 }, /* options = { defaults: { unknownKeys: 'allow' } } */);
 ````
