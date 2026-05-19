@@ -29,7 +29,7 @@
 		"@trenskow/caseit": "^1.4.23",
 		"@trenskow/dotenv": "^0.1.28",
 		"@trenskow/merge": "^0.1.56",
-		"isvalid": "^5.0.0",
+		"isvalid": "^5.0.1",
 		"keyd": "^2.1.56"
 	},
 	"devDependencies": {
@@ -37,7 +37,7 @@
 		"@eslint/js": "^10.0.1",
 		"chai": "^6.2.2",
 		"chai-as-promised": "^8.0.2",
-		"eslint": "^10.3.0",
+		"eslint": "^10.4.0",
 		"globals": "^17.6.0",
 		"mocha": "^11.7.5"
 	}
