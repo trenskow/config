@@ -30,7 +30,7 @@
 		"@trenskow/dotenv": "^0.1.29",
 		"@trenskow/merge": "^0.1.57",
 		"isvalid": "^5.0.3",
-		"keyd": "^2.1.58"
+		"keyd": "^2.1.60"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.5",
@@ -39,6 +39,6 @@
 		"chai-as-promised": "^8.0.2",
 		"eslint": "^10.4.0",
 		"globals": "^17.6.0",
-		"mocha": "^11.7.5"
+		"mocha": "^11.7.6"
 	}
 }
