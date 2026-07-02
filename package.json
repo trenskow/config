@@ -27,10 +27,10 @@
 	"homepage": "https://github.com/trenskow/config#readme",
 	"dependencies": {
 		"@trenskow/caseit": "^1.4.27",
-		"@trenskow/dotenv": "^0.1.32",
-		"@trenskow/merge": "^0.1.60",
-		"isvalid": "^5.0.10",
-		"keyd": "^2.1.66"
+		"@trenskow/dotenv": "^0.1.33",
+		"@trenskow/merge": "^0.1.61",
+		"isvalid": "^5.0.11",
+		"keyd": "^2.1.67"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.5",
