@@ -29,7 +29,7 @@
 		"@trenskow/caseit": "^1.4.29",
 		"@trenskow/dotenv": "^0.1.35",
 		"@trenskow/merge": "^0.1.63",
-		"isvalid": "^5.0.16",
+		"isvalid": "^5.0.17",
 		"keyd": "^2.1.72"
 	},
 	"devDependencies": {
