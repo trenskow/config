@@ -28,9 +28,9 @@
 	"dependencies": {
 		"@trenskow/caseit": "^1.4.32",
 		"@trenskow/dotenv": "^0.1.39",
-		"@trenskow/merge": "^0.1.66",
-		"isvalid": "^5.0.23",
-		"keyd": "^2.1.76"
+		"@trenskow/merge": "^0.1.67",
+		"isvalid": "^5.0.24",
+		"keyd": "^2.1.77"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.7",
